@@ -1,0 +1,41 @@
+import type { SessionTaskInterface, PreCacheDelegate, MemoryCacheInterface, MemoryCacheDelegate, MemoryCachePolicyInterface } from './types/type';
+import { FileSystemManager } from './Libs/fileSystem';
+import { type Encoding } from './Libs/session';
+export declare class CacheManager implements PreCacheDelegate, MemoryCacheDelegate<any> {
+    private _sessionTask;
+    private _storage;
+    private _bridgeServer;
+    private _preCache;
+    private runningPort?;
+    private _memoryCache?;
+    constructor(serverName: string, devMode: boolean, _sessionTask?: SessionTaskInterface, _storage?: FileSystemManager);
+    get memoryCache(): MemoryCacheInterface<string> | undefined;
+    get sessionTask(): SessionTaskInterface;
+    get localFileUrl(): string;
+    get fileEncodingFormat(): Encoding;
+    get cacheFolder(): string;
+    private putCachedFile;
+    getCachedFile(forKey: string, folder?: string): string | undefined;
+    getCachedFileAsync(url: string, folder?: string): Promise<string | undefined>;
+    enableMemoryCache(cachePolicy: MemoryCachePolicyInterface): void;
+    disableMemoryCache(): void;
+    clearMemoryCache(): void;
+    clearCache(): Promise<void>;
+    removeCachedVideo(url: string): Promise<void>;
+    setMemoryCacheDelegate(delegate?: MemoryCacheDelegate<any>): void;
+    didEvictHandler(key: string, filePath?: string): Promise<void>;
+    private loadCacheFromStorage;
+    private saveCacheToStorage;
+    preCacheForList(urls: string[]): Promise<void>;
+    preCacheFor(url: string): Promise<string>;
+    onCachingPlaylistSource(forUrl: string, data: any, folder: string): Promise<void>;
+    contain(forKey: string): boolean;
+    existsFile(forKey: string): Promise<boolean>;
+    enableBridgeServer(port: number): void;
+    disableBridgeServer(): void;
+    reverseProxyURL(forUrl: string): string;
+    private addRequestHandlers;
+    private addPlaylistHandler;
+    private addSegmentHandler;
+}
+//# sourceMappingURL=ProxyCacheManager.d.ts.map

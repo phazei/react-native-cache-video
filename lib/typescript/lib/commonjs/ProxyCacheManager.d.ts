@@ -1,0 +1,44 @@
+export const __esModule: boolean;
+export class CacheManager {
+    constructor(serverName: any, devMode: any, _sessionTask?: _session.SimpleSessionProvider, _storage?: _fileSystem.FileSystemManager);
+    _sessionTask: _session.SimpleSessionProvider;
+    _storage: _fileSystem.FileSystemManager;
+    _bridgeServer: _httpProxy.BridgeServer;
+    _preCache: _PreCacheProvider.PreCacheProvider;
+    get memoryCache(): _MemoryCacheProvider.MemoryCacheProvider | undefined;
+    get sessionTask(): _session.SimpleSessionProvider;
+    get localFileUrl(): string;
+    get fileEncodingFormat(): string;
+    get cacheFolder(): any;
+    putCachedFile(forKey: any, folder: any): void;
+    getCachedFile(forKey: any, folder?: any): any;
+    getCachedFileAsync(url: any, folder?: any): Promise<any>;
+    enableMemoryCache(cachePolicy: any): void;
+    _memoryCache: _MemoryCacheProvider.MemoryCacheProvider | undefined;
+    disableMemoryCache(): void;
+    clearMemoryCache(): void;
+    clearCache(): Promise<void>;
+    removeCachedVideo(url: any): Promise<void>;
+    setMemoryCacheDelegate(delegate: any): void;
+    didEvictHandler(key: any, filePath: any): Promise<void>;
+    loadCacheFromStorage(): Promise<void>;
+    saveCacheToStorage(): Promise<void>;
+    preCacheForList(urls: any): Promise<void>;
+    preCacheFor(url: any): Promise<any>;
+    onCachingPlaylistSource(forUrl: any, data: any, folder: any): Promise<void>;
+    contain(forKey: any): boolean;
+    existsFile(forKey: any): Promise<boolean>;
+    enableBridgeServer(port: any): void;
+    runningPort: any;
+    disableBridgeServer(): void;
+    reverseProxyURL(forUrl: any): any;
+    addRequestHandlers(): void;
+    addPlaylistHandler(forUrl: any, __filePath: any, headers: any, reverseRes: any): Promise<any>;
+    addSegmentHandler(forUrl: any, filePath: any, headers: any, reverseRes: any): Promise<void>;
+}
+import _session = require("./Libs/session");
+import _fileSystem = require("./Libs/fileSystem");
+import _httpProxy = require("./Libs/httpProxy");
+import _PreCacheProvider = require("./Provider/PreCacheProvider");
+import _MemoryCacheProvider = require("./Provider/MemoryCacheProvider");
+//# sourceMappingURL=ProxyCacheManager.d.ts.map

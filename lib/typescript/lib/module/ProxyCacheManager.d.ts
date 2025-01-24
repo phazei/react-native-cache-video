@@ -1,0 +1,43 @@
+export class CacheManager {
+    constructor(serverName: any, devMode: any, _sessionTask?: SimpleSessionProvider, _storage?: FileSystemManager);
+    _sessionTask: SimpleSessionProvider;
+    _storage: FileSystemManager;
+    _bridgeServer: BridgeServer;
+    _preCache: PreCacheProvider;
+    get memoryCache(): MemoryCacheProvider | undefined;
+    get sessionTask(): SimpleSessionProvider;
+    get localFileUrl(): string;
+    get fileEncodingFormat(): string;
+    get cacheFolder(): string;
+    putCachedFile(forKey: any, folder: any): void;
+    getCachedFile(forKey: any, folder?: string): any;
+    getCachedFileAsync(url: any, folder?: string): Promise<any>;
+    enableMemoryCache(cachePolicy: any): void;
+    _memoryCache: MemoryCacheProvider | undefined;
+    disableMemoryCache(): void;
+    clearMemoryCache(): void;
+    clearCache(): Promise<void>;
+    removeCachedVideo(url: any): Promise<void>;
+    setMemoryCacheDelegate(delegate: any): void;
+    didEvictHandler(key: any, filePath: any): Promise<void>;
+    loadCacheFromStorage(): Promise<void>;
+    saveCacheToStorage(): Promise<void>;
+    preCacheForList(urls: any): Promise<void>;
+    preCacheFor(url: any): Promise<any>;
+    onCachingPlaylistSource(forUrl: any, data: any, folder: any): Promise<void>;
+    contain(forKey: any): boolean;
+    existsFile(forKey: any): Promise<boolean>;
+    enableBridgeServer(port: any): void;
+    runningPort: any;
+    disableBridgeServer(): void;
+    reverseProxyURL(forUrl: any): any;
+    addRequestHandlers(): void;
+    addPlaylistHandler(forUrl: any, __filePath: any, headers: any, reverseRes: any): Promise<any>;
+    addSegmentHandler(forUrl: any, filePath: any, headers: any, reverseRes: any): Promise<void>;
+}
+import { SimpleSessionProvider } from './Libs/session';
+import { FileSystemManager } from './Libs/fileSystem';
+import { BridgeServer } from './Libs/httpProxy';
+import { PreCacheProvider } from './Provider/PreCacheProvider';
+import { MemoryCacheProvider } from './Provider/MemoryCacheProvider';
+//# sourceMappingURL=ProxyCacheManager.d.ts.map

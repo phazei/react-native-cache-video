@@ -31,6 +31,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
+    "release-repo": "bash ./scripts/release-repo.sh",
     "prepare": "bob build",
     "release": "release-it"
   },

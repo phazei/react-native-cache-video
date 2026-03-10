@@ -13,12 +13,10 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-// @ts-expect-error
-const isTurboModuleEnabled = global.__turboModuleProxy != null;
-
-const CacheVideoHttpProxyModule = isTurboModuleEnabled
-  ? require('../NativeCacheVideoHttpProxy').default
-  : NativeModules.CacheVideoHttpProxy;
+// Always use the bridge path. The TurboModule codegen spec exists but the
+// native side is a classic module, and RN 0.79+ sets __turboModuleProxy
+// even with newArch disabled, causing getEnforcing() to return null.
+const CacheVideoHttpProxyModule = NativeModules.CacheVideoHttpProxy;
 
 export const CacheVideoHttpProxy: HttpServer = CacheVideoHttpProxyModule
   ? CacheVideoHttpProxyModule
@@ -196,7 +194,8 @@ export class BridgeServer implements BridgeServerInterface {
   };
 
   stop() {
-    HttpProxy.stop();
+    if (!this.isRunning) return;
     this.isRunning = false;
+    HttpProxy.stop();
   }
 }
